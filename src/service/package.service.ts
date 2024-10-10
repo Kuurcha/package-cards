@@ -13,4 +13,12 @@ export class PackageService {
   getAll(): Observable<NpmPackage[]> {
     return this.http.get<NpmPackage[]>(`${this.baseUrl}`);
   }
+
+  get(id:string): Observable<NpmPackage[]> {
+    return this.http.get<NpmPackage[]>(`${this.baseUrl}/${id}`);
+  }
+
+  getDepenencies(id:string): Observable<NpmPackage[]> {
+    return this.http.get<NpmPackage[]>(`${this.baseUrl}/${id}/dependencies`);
+  }
 }

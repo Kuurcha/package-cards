@@ -1,19 +1,14 @@
 <div class="container">
   <h2>NPM Packages Data</h2>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Weekly Downloads</th>
-        <th>Dependency Count</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let npmPackage of npmPackages">
-        <td>{{ npmPackage.id }}</td>
-        <td>{{ npmPackage.weeklyDownloads }}</td>
-        <td>{{ npmPackage.dependencyCount }}</td>
-      </tr>
-    </tbody>
-  </table>
+    <mat-grid-list cols="3" rowHeight="200px" class="grid-list" gutterSize="20px">
+      <mat-grid-tile *ngFor="let npmPackage of npmPackages" class = "custom-card">
+          <div class="card-content">
+            <div>{{ npmPackage.id }}</div>
+            <div>{{ npmPackage.weeklyDownloads }}</div>
+            <div>{{ npmPackage.dependencyCount }}</div>
+          </div>
+      </mat-grid-tile>
+  
+    </mat-grid-list>
+
 </div>
