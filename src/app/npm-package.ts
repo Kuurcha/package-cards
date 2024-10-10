@@ -1,2 +1,1 @@
-export interface NpmPackage {
-}
+export interface NpmPackage {}
