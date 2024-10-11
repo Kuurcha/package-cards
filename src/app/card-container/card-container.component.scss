@@ -1,8 +1,22 @@
-.package-card {
+.package-base {
   background-color: white;
+  border-color: black;
+  margin-left: 4px;
+  margin-right: 4px;
   border: 2px solid;
-  margin: 4px;
   max-width: 100%;
-  border-radius: 8px;
-  flex: 1 1 calc(100% / 3) !important;
+
+  max-width: 100%;
+}
+
+.package-card {
+  @extend .package-base;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.package-header {
+  @extend .package-base;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
