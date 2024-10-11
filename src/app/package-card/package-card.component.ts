@@ -11,18 +11,11 @@ import { NpmPackage } from "../../model/npm-package";
   styleUrl: "./package-card.component.scss",
 })
 export class PackageCardComponent {
-  @Input() rows: number = 2;
-  @Input() cols: number = 3;
-
-  @Input() containerWidth: string = '70vh'; 
-  @Input() containerHeight: string = '200px'; 
+  @Input() row: Number = 2;
+  @Input() col: number = 3;
 
   itemWidth: number = 0;
   itemHeight: number = 0;
-  calculateItemSize() {
 
-      this.itemWidth = Math.floor(this.containerWidth / this.cols);
-      this.itemHeight = Math.floor(this.containerHeight / this.rows);
-  }
-
+  @Input() npmPackages: NpmPackage[] = [];
 }
