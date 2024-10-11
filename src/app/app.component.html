@@ -1,12 +1,4 @@
 <div class="container">
   <h2>NPM Packages Data</h2>
-  <mat-grid-list cols="3" rowHeight="200px" class="grid-list" gutterSize="20px">
-    <mat-grid-tile *ngFor="let npmPackage of npmPackages" class="custom-card">
-      <div class="card-content">
-        <div>{{ npmPackage.id }}</div>
-        <div>{{ npmPackage.weeklyDownloads }}</div>
-        <div>{{ npmPackage.dependencyCount }}</div>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <app-package-card [npmPackages]="npmPackages"> </app-package-card>
 </div>

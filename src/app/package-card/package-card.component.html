@@ -1,0 +1,10 @@
+<div class="grid-styling grid-flex">
+  <div *ngFor="let npmPackage of npmPackages">
+    <app-card-container
+      class="card-size"
+      [title]="npmPackage.id"
+      [weeklyDownloads]="npmPackage.weeklyDownloads"
+      [dependencyCount]="npmPackage.dependencyCount"
+    ></app-card-container>
+  </div>
+</div>

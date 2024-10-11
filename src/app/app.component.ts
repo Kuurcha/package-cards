@@ -1,21 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { PackageService } from '../service/package.service';
-import { NpmPackage } from '../model/npm-package';
-import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { PackageService } from "../service/package.service";
+import { NpmPackage } from "../model/npm-package";
+import { CommonModule } from "@angular/common";
+import { MatCardModule } from "@angular/material/card";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { PackageCardComponent } from "./package-card/package-card.component";
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, CommonModule, MatCardModule, MatGridListModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  imports: [RouterOutlet, CommonModule, PackageCardComponent],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.scss",
 })
 export class AppComponent {
-  ROW = 2;
-  COL = 3;
-
   npmPackages: NpmPackage[] = [];
   constructor(private packageSerivce: PackageService) {}
 
@@ -29,5 +27,5 @@ export class AppComponent {
       },
     });
   }
-  title = 'package-cards';
+  title = "package-cards";
 }
