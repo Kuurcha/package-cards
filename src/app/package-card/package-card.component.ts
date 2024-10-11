@@ -11,11 +11,8 @@ import { NpmPackage } from "../../model/npm-package";
   styleUrl: "./package-card.component.scss",
 })
 export class PackageCardComponent {
-  @Input() row: Number = 2;
-  @Input() col: number = 3;
-
-  itemWidth: number = 0;
-  itemHeight: number = 0;
+  @Input() width: string = "70vh";
+  @Input() height: string = "200px";
 
   @Input() npmPackages: NpmPackage[] = [];
 }
