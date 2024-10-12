@@ -1,9 +1,16 @@
 <div class="container">
   <h2>NPM Packages Data</h2>
-  <form>
-    <mat-form-field class="search-field">
-      <input matInput placeholder="Write package name here to search" [formControl]="filter" />
-    </mat-form-field>
-  </form>
-  <app-package-card [npmPackages]="selectedPackages"> </app-package-card>
+  <div>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+      <form class="w-100" [formGroup]="filterForm">
+        <mat-form-field class="w-100 m-1">
+          <input subscriptSizing="dynamic" matInput placeholder="Write package name here to search" formControlName="searchQuery" />
+        </mat-form-field>
+      </form>
+      <button mat-fab class="ms-2 h-50" (click)="refresh()">
+        <mat-icon aria-hidden="false" fontIcon="refresh"></mat-icon>
+      </button>
+    </div>
+    <app-package-card [npmPackages]="selectedPackages"> </app-package-card>
+  </div>
 </div>
