@@ -1,9 +1,13 @@
-<div class="margain">
-  <div class="package-header">
+<div class="card-container mt-1 mb-1">
+  <div class="package-header rounded-top ps-1">
     {{ title }}
   </div>
-  <div class="package-card">
-    <div>{{ weeklyDownloads }}</div>
-    <div>{{ dependencyCount }}</div>
+  <div class="package-card rounded-bottom">
+    <div class="d-flex flex-row m-1">
+      <div>{{ formatDownloadCount() }}</div>
+      <mat-icon aria-hidden="false" fontIcon="download"></mat-icon>
+    </div>
+
+    <div class="dependency-info m-1">{{ dependencyCount }} dependencies</div>
   </div>
 </div>

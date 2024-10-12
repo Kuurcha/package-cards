@@ -1,4 +1,9 @@
 <div class="container">
   <h2>NPM Packages Data</h2>
-  <app-package-card [npmPackages]="npmPackages"> </app-package-card>
+  <form>
+    <mat-form-field class="search-field">
+      <input matInput placeholder="Write package name here to search" [formControl]="filter" />
+    </mat-form-field>
+  </form>
+  <app-package-card [npmPackages]="selectedPackages"> </app-package-card>
 </div>
