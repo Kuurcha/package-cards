@@ -39,6 +39,8 @@ export class AppComponent implements OnDestroy {
     this.$destroyed.complete();
   }
 
+  title = "package-cards";
+
   filterForm: FormGroup;
 
   refresh() {
@@ -72,5 +74,4 @@ export class AppComponent implements OnDestroy {
         }
       });
   }
-  title = "package-cards";
 }
