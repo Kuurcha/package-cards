@@ -18,3 +18,14 @@ https://github.com/MrCelestis/mock-interview-api
       allowedHeaders: ['Content-Type', 'Authorization'], 
   }));
 ```
+
+Есть возможность заменить в api источник данных для отображения произвольно генерируемых пакетов.
+<br/>
+Тестовый пример:
+```js
+const dataset = fixedSample
+```
+Тестовый генерируемый пакет:
+```js
+const dataset = createRandomSample(количество_пакетов)
+``
