@@ -12,6 +12,8 @@ import { NpmPackage } from "../../model/npm-package";
 })
 export class PackageCardComponent {
   @Input() height: string = "300px";
+  @Input() npmPackages: NpmPackage[] = [];
+  @Input() depedencyPackageNames: string[] = [];
 
   hoveredName = output<string>();
 
@@ -22,7 +24,4 @@ export class PackageCardComponent {
   onCardHover(packageName: string) {
     this.hoveredName.emit(packageName);
   }
-
-  @Input() npmPackages: NpmPackage[] = [];
-  @Input() depedencyPackageNames: string[] = [];
 }

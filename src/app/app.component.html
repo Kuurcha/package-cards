@@ -11,6 +11,11 @@
     </button>
   </div>
 
-  <app-package-card [npmPackages]="selectedPackages" [depedencyPackageNames]="depedencyPackageNames" (hoveredName)="onCardHover($event)">
+  <app-package-card
+    class="w-50"
+    [npmPackages]="selectedPackages"
+    [depedencyPackageNames]="depedencyPackageNames"
+    (hoveredName)="onCardHover($event)"
+  >
   </app-package-card>
 </div>

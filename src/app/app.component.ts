@@ -22,16 +22,13 @@ export class AppComponent implements OnDestroy {
   npmPackages: NpmPackage[] = [];
   selectedPackages: NpmPackage[] = [];
   depedencyPackageNames: string[] = [];
+
+  filterForm: FormGroup;
   private hoverSubject = new Subject<string>();
-
-  onCardHover(packageName: string) {
-    this.hoverSubject.next(packageName);
-  }
-
-  minWidth: string = "100%";
+  private $destroyed = new Subject<void>();
 
   constructor(
-    private packageSerivce: PackageService,
+    private packageService: PackageService,
     private fb: FormBuilder
   ) {
     this.filterForm = this.fb.group({
@@ -39,24 +36,16 @@ export class AppComponent implements OnDestroy {
     });
   }
 
-  private $destroyed = new Subject<void>();
-
-  ngOnDestroy(): void {
-    this.$destroyed.next();
-    this.$destroyed.complete();
+  onCardHover(packageName: string) {
+    this.hoverSubject.next(packageName);
   }
-
-  title = "package-cards";
-
-  filterForm: FormGroup;
-
   refresh() {
     this.filterForm.reset();
     this.loadData();
   }
 
   loadData() {
-    this.packageSerivce.getAll().subscribe({
+    this.packageService.getAll().subscribe({
       next: (result: NpmPackage[]) => {
         this.npmPackages = result;
         this.selectedPackages = result;
@@ -67,7 +56,7 @@ export class AppComponent implements OnDestroy {
     });
   }
 
-  subscribeToInitalDataFetch() {
+  subscribeToFilterChanges() {
     this.filterForm
       .get("searchQuery")
       ?.valueChanges.pipe(debounceTime(300), takeUntil(this.$destroyed))
@@ -80,6 +69,7 @@ export class AppComponent implements OnDestroy {
       });
   }
 
+  // Подписка на изменение выбранного пакета
   subscribeToHoverChange() {
     this.hoverSubject
       .pipe(
@@ -87,7 +77,16 @@ export class AppComponent implements OnDestroy {
         takeUntil(this.$destroyed),
         switchMap((packageName: string) => {
           if (packageName !== "") {
-            return this.packageSerivce.getDepenencies(packageName);
+            return this.packageService.getDepenencies(packageName).pipe(
+              catchError((err) => {
+                if (err.status === 404) {
+                  console.log("У данного пакета отсуствуют зависимости", err);
+                } else {
+                  console.error("Неизвестная ошибка во время формирования запроса: ", err);
+                }
+                return of([]);
+              })
+            );
           } else {
             return of([]);
           }
@@ -105,7 +104,12 @@ export class AppComponent implements OnDestroy {
 
   ngOnInit(): void {
     this.loadData();
-    this.subscribeToInitalDataFetch();
+    this.subscribeToFilterChanges();
     this.subscribeToHoverChange();
+  }
+
+  ngOnDestroy(): void {
+    this.$destroyed.next();
+    this.$destroyed.complete();
   }
 }
