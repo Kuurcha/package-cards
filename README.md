@@ -25,7 +25,7 @@ https://github.com/MrCelestis/mock-interview-api
 ```js
 const dataset = fixedSample
 ```
-Тестовый генерируемый пакет:
+Тестовый генерируемый пример:
 ```js
 const dataset = createRandomSample(количество_пакетов)
-``
+```
