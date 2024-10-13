@@ -1,6 +1,7 @@
-<div class="card-container mt-1 mb-1">
-  <div class="package-header rounded-top ps-1 text-truncate" matTooltip="{{ title }}">
-    {{ title }}
+<div class="card-container mt-1 mb-1" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+  <div [ngClass]="{ 'depedency-container': isDependency }" class="package-header rounded-top ps-1 text-truncate" matTooltip="{{ title }}">
+    <span class="prefix-color">{{ getPackagePrefix(title) }}</span>
+    <span>{{ getPackageName(title) }}</span>
   </div>
   <div class="package-card rounded-bottom">
     <div class="d-flex flex-row m-1">

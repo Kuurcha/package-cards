@@ -18,7 +18,7 @@ export class PackageService {
     return this.http.get<NpmPackage[]>(`${this.baseUrl}/${id}`);
   }
 
-  getDepenencies(id: string): Observable<NpmPackage[]> {
-    return this.http.get<NpmPackage[]>(`${this.baseUrl}/${id}/dependencies`);
+  getDepenencies(id: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/${id}/dependencies`);
   }
 }

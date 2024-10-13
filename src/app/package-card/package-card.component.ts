@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, HostListener, Input, output } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CardContainerComponent } from "../card-container/card-container.component";
 import { NpmPackage } from "../../model/npm-package";
@@ -13,5 +13,16 @@ import { NpmPackage } from "../../model/npm-package";
 export class PackageCardComponent {
   @Input() height: string = "300px";
 
+  hoveredName = output<string>();
+
+  isPresentInDepedencyPackageArray(packageName: string): boolean {
+    return this.depedencyPackageNames.includes(packageName);
+  }
+
+  onCardHover(packageName: string) {
+    this.hoveredName.emit(packageName);
+  }
+
   @Input() npmPackages: NpmPackage[] = [];
+  @Input() depedencyPackageNames: string[] = [];
 }

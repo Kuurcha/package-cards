@@ -1,9 +1,11 @@
 <div class="grid-styling grid-flex" [ngStyle]="{ height: height }">
   <div *ngFor="let npmPackage of npmPackages">
     <app-card-container
+      (hoveredName)="onCardHover($event)"
       [title]="npmPackage.id"
       [weeklyDownloads]="npmPackage.weeklyDownloads"
       [dependencyCount]="npmPackage.dependencyCount"
+      [isDependency]="isPresentInDepedencyPackageArray(npmPackage.id)"
     ></app-card-container>
   </div>
 </div>

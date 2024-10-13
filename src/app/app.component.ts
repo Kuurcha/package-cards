@@ -21,6 +21,13 @@ import { MatIconModule } from "@angular/material/icon";
 export class AppComponent implements OnDestroy {
   npmPackages: NpmPackage[] = [];
   selectedPackages: NpmPackage[] = [];
+  depedencyPackageNames: string[] = [];
+  private hoverSubject = new Subject<string>();
+
+  onCardHover(packageName: string) {
+    this.hoverSubject.next(packageName);
+  }
+
   minWidth: string = "100%";
 
   constructor(
@@ -60,9 +67,7 @@ export class AppComponent implements OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.loadData();
-
+  subscribeToInitalDataFetch() {
     this.filterForm
       .get("searchQuery")
       ?.valueChanges.pipe(debounceTime(300), takeUntil(this.$destroyed))
@@ -73,5 +78,34 @@ export class AppComponent implements OnDestroy {
           console.log(this.selectedPackages);
         }
       });
+  }
+
+  subscribeToHoverChange() {
+    this.hoverSubject
+      .pipe(
+        debounceTime(50),
+        takeUntil(this.$destroyed),
+        switchMap((packageName: string) => {
+          if (packageName !== "") {
+            return this.packageSerivce.getDepenencies(packageName);
+          } else {
+            return of([]);
+          }
+        })
+      )
+      .subscribe({
+        next: (result: string[]) => {
+          this.depedencyPackageNames = result;
+        },
+        error: (err: any) => {
+          this.depedencyPackageNames = [];
+        },
+      });
+  }
+
+  ngOnInit(): void {
+    this.loadData();
+    this.subscribeToInitalDataFetch();
+    this.subscribeToHoverChange();
   }
 }
